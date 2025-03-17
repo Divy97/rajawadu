@@ -259,3 +259,58 @@ body {
   pointer-events: none;
   z-index: 1;
 }
+
+/* High Contrast Mode Styles for better accessibility */
+.high-contrast {
+  /* Higher contrast colors for text and backgrounds */
+  --sweet-brown-high-contrast: #a73400; /* Darker and more contrasting brown */
+  --sweet-orange-high-contrast: #d84900; /* Darker orange for better contrast */
+}
+
+.high-contrast .text-sweet-brown {
+  color: var(--sweet-brown-high-contrast) !important;
+}
+
+.high-contrast .text-sweet-orange {
+  color: var(--sweet-orange-high-contrast) !important;
+}
+
+.high-contrast .text-sweet-brown\/80,
+.high-contrast .text-sweet-brown\/70,
+.high-contrast .text-sweet-brown\/60 {
+  color: var(--sweet-brown-high-contrast) !important;
+  opacity: 0.9 !important; /* Keep opacity high for better readability */
+}
+
+.high-contrast .bg-sweet-orange {
+  background-color: var(--sweet-orange-high-contrast) !important;
+}
+
+.high-contrast .bg-sweet-brown {
+  background-color: var(--sweet-brown-high-contrast) !important;
+}
+
+.high-contrast .border-sweet-orange {
+  border-color: var(--sweet-orange-high-contrast) !important;
+}
+
+.high-contrast .border-sweet-brown {
+  border-color: var(--sweet-brown-high-contrast) !important;
+}
+
+/* Additional focus states for better keyboard navigation */
+.high-contrast button:focus-visible,
+.high-contrast a:focus-visible,
+.high-contrast input:focus-visible,
+.high-contrast select:focus-visible,
+.high-contrast textarea:focus-visible {
+  outline: 3px solid #005fd2 !important; /* High visibility blue outline */
+  outline-offset: 2px !important;
+}
+
+/* Higher contrast for input placeholders */
+.high-contrast input::placeholder,
+.high-contrast textarea::placeholder {
+  color: #666 !important; /* Darker placeholder text */
+  opacity: 1 !important;
+}

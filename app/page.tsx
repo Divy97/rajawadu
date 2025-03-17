@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ProductGrid } from "@/components/products/ProductGrid";
+import { ProductGridWithErrorBoundary } from "@/components/products/ProductGridWithErrorBoundary";
 import { getFeaturedProducts } from "@/lib/api/products";
+import Script from "next/script";
+import { NewsletterForm } from "@/components/NewsletterForm";
 
 export const revalidate = 3600; // Revalidate this page every hour
 
@@ -9,8 +11,68 @@ export default async function Home() {
   // Fetch featured products from Supabase
   const featuredProducts = await getFeaturedProducts();
 
+  // Organization structured data
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Raja Wadu",
+    url: "https://rajawadu.com",
+    logo: "https://rajawadu.com/images/logo.png",
+    sameAs: [
+      "https://facebook.com/rajawadu",
+      "https://instagram.com/rajawadu",
+      "https://twitter.com/rajawadu",
+    ],
+    description:
+      "Premium royal Mukhwas and traditional Indian mouth fresheners crafted with century-old family recipes.",
+    foundingDate: "2025",
+    founders: [
+      {
+        "@type": "Person",
+        name: "Vansh Shah",
+      },
+    ],
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "India",
+      addressRegion: "Gujarat",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      email: "info@rajawadu.com",
+    },
+  };
+
+  // Website structured data
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    url: "https://rajawadu.com",
+    name: "Rajawadu",
+    description:
+      "Premium royal Mukhwas and traditional Indian mouth fresheners.",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://rajawadu.com/products/search?q={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   return (
     <main>
+      {/* JSON-LD structured data */}
+      <Script
+        id="organization-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
+      <Script
+        id="website-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
+
       <div className="min-h-screen bg-[#FDF5ED] bg-grain-texture">
         {/* Hero Section - Clean Minimal Design */}
         <section className="relative bg-[#FDF5ED] overflow-hidden pt-16 pb-24">
@@ -71,7 +133,19 @@ export default async function Home() {
 
                     {/* Central Product Image */}
                     <div className="absolute inset-[90px] rounded-full bg-white shadow-lg overflow-hidden">
-                      <div className="absolute inset-4 rounded-full bg-gradient-to-br from-sweet-orange/5 to-sweet-brown/10"></div>
+                      <div className="absolute inset-4 rounded-full bg-gradient-to-br from-sweet-orange/5 to-sweet-brown/10">
+                        {/* Hero product image
+                        <div className="relative w-full h-full">
+                          <Image
+                            src="/images/hero-product.webp"
+                            alt="Premium Royal Mukhwas Collection"
+                            fill
+                            priority
+                            className="object-cover rounded-full"
+                            sizes="(max-width: 768px) 200px, 220px"
+                          />
+                        </div> */}
+                      </div>
                     </div>
                   </div>
 
@@ -120,41 +194,37 @@ export default async function Home() {
         {/* Featured Products Section */}
         <section className="py-24 container mx-auto">
           <div className="max-w-screen-xl mx-auto">
-            <div className="mb-16 text-center">
+            <div className="text-center mb-12">
               <span className="text-sm uppercase tracking-[0.2em] text-sweet-brown/60 font-medium mb-6 block">
-                Our Bestsellers
+                Our Collection
               </span>
               <h2 className="text-4xl md:text-5xl font-logo text-sweet-brown mb-6">
-                Featured Products
+                Discover Featured Flavors
               </h2>
               <div className="flex items-center justify-center gap-6 mb-4">
                 <div className="h-px w-16 bg-gradient-to-r from-transparent via-sweet-brown/20 to-transparent"></div>
                 <div className="text-sweet-orange">❖</div>
                 <div className="h-px w-16 bg-gradient-to-r from-transparent via-sweet-brown/20 to-transparent"></div>
               </div>
+              <p className="text-xl font-serif text-sweet-brown/80 max-w-3xl mx-auto">
+                Explore our handcrafted collection of premium mukhwas and mouth
+                fresheners, made with rare herbs and spices.
+              </p>
             </div>
 
-            {featuredProducts.length > 0 ? (
-              <ProductGrid products={featuredProducts.slice(0, 4)} />
-            ) : (
-              <div className="text-center py-12">
-                <div className="mb-6 text-sweet-orange text-4xl">✨</div>
-                <h3 className="text-2xl font-logo text-sweet-brown mb-4">
-                  Coming Soon
-                </h3>
-                <p className="text-sweet-brown/70 font-serif max-w-md mx-auto">
-                  We&apos;re preparing something special for you. Please check
-                  back later to discover our featured products.
-                </p>
-              </div>
-            )}
+            {/* Featured Products with Error Boundary */}
+            <ProductGridWithErrorBoundary
+              products={featuredProducts.slice(0, 4)}
+            />
 
-            <div className="mt-16 text-center">
-              <Button className="bg-sweet-brown hover:bg-sweet-orange text-white px-8 py-6 rounded-full transition-colors">
-                <Link href="/products" className="font-logo tracking-wide">
-                  View All Products
-                </Link>
-              </Button>
+            <div className="text-center mt-16">
+              <Link href="/products">
+                <Button className="bg-sweet-brown hover:bg-sweet-brown/90 text-white rounded-lg px-12 py-7">
+                  <span className="font-logo tracking-wide">
+                    View All Products
+                  </span>
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
@@ -279,16 +349,9 @@ export default async function Home() {
                 Subscribe to receive updates about our seasonal specials, family
                 recipes, and exclusive dining experiences.
               </p>
-              <div className="flex gap-4 max-w-md mx-auto justify-center items-center">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-6 py-4 rounded-lg border-2 border-sweet-orange/20 focus:border-sweet-orange focus:outline-none font-serif"
-                />
-                <Button className="bg-sweet-orange hover:bg-sweet-orange/90 text-white rounded-lg px-8 py-7">
-                  <span className="font-logo tracking-wide">Subscribe</span>
-                </Button>
-              </div>
+
+              {/* Accessible Newsletter Form with Toast Notifications */}
+              <NewsletterForm />
             </div>
           </div>
         </section>
