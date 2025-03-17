@@ -134,7 +134,20 @@ export default async function Home() {
               </div>
             </div>
 
-            <ProductGrid products={featuredProducts.slice(0, 4)} />
+            {featuredProducts.length > 0 ? (
+              <ProductGrid products={featuredProducts.slice(0, 4)} />
+            ) : (
+              <div className="text-center py-12">
+                <div className="mb-6 text-sweet-orange text-4xl">✨</div>
+                <h3 className="text-2xl font-logo text-sweet-brown mb-4">
+                  Coming Soon
+                </h3>
+                <p className="text-sweet-brown/70 font-serif max-w-md mx-auto">
+                  We&apos;re preparing something special for you. Please check
+                  back later to discover our featured products.
+                </p>
+              </div>
+            )}
 
             <div className="mt-16 text-center">
               <Button className="bg-sweet-brown hover:bg-sweet-orange text-white px-8 py-6 rounded-full transition-colors">

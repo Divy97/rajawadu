@@ -72,20 +72,30 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
  * Get featured products for the home page
  */
 export async function getFeaturedProducts(): Promise<Product[]> {
-  const supabase = await createClient();
+  try {
+    const supabase = await createClient();
 
-  const { data, error } = await supabase
-    .from("products")
-    .select("*, categories(name)")
-    .eq("featured", true)
-    .order("name");
+    const { data, error } = await supabase
+      .from("products")
+      .select("*, categories(name)")
+      .eq("featured", true)
+      .order("name");
 
-  if (error) {
-    console.error("Error fetching featured products:", error);
-    throw new Error("Failed to fetch featured products");
+    if (error) {
+      console.error("Error fetching featured products:", {
+        message: error.message,
+        details: error.details,
+        hint: error.hint,
+        code: error.code,
+      });
+      return []; // Return empty array instead of throwing
+    }
+
+    return data ? data.map(transformProductData) : [];
+  } catch (error) {
+    console.error("Unexpected error in getFeaturedProducts:", error);
+    return []; // Return empty array for any unexpected errors
   }
-
-  return data.map(transformProductData);
 }
 
 /**
