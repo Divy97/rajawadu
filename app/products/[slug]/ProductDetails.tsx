@@ -123,24 +123,24 @@ export function ProductDetails({ product }: ProductDetailsProps) {
   }, [selectedSize, product.id]);
 
   // Custom handlers for changing size and quantity
-  const handleSizeChange = (size: string) => {
-    // Add a gentle animation for size change
-    const sizeButtons = document.querySelectorAll('[role="radio"]');
-    sizeButtons.forEach((button) => {
-      if (button.getAttribute("aria-checked") === "true") {
-        button.classList.add("scale-95", "opacity-70");
-        setTimeout(() => {
-          button.classList.remove("scale-95", "opacity-70");
-          setSelectedSize(size);
-        }, 150);
-      }
-    });
+  // const handleSizeChange = (size: string) => {
+  //   // Add a gentle animation for size change
+  //   const sizeButtons = document.querySelectorAll('[role="radio"]');
+  //   sizeButtons.forEach((button) => {
+  //     if (button.getAttribute("aria-checked") === "true") {
+  //       button.classList.add("scale-95", "opacity-70");
+  //       setTimeout(() => {
+  //         button.classList.remove("scale-95", "opacity-70");
+  //         setSelectedSize(size);
+  //       }, 150);
+  //     }
+  //   });
 
-    if (!sizeButtons.length) {
-      setSelectedSize(size);
-    }
-    // URL will be updated via the effect
-  };
+  //   if (!sizeButtons.length) {
+  //     setSelectedSize(size);
+  //   }
+  //   // URL will be updated via the effect
+  // };
 
   const handleQuantityChange = (newQuantity: number) => {
     if (!isNaN(newQuantity) && newQuantity > 0 && newQuantity <= 99) {
@@ -335,8 +335,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               </div>
             </div>
           </div>
-
-          {/* Size Selection */}
+          {/* Size Selection
           <div className="space-y-3 mt-8">
             <h3 className="font-logo text-lg text-sweet-brown" id="size-label">
               Select Size
@@ -364,8 +363,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                 </button>
               ))}
             </div>
-          </div>
-
+          </div> */}
           {/* Quantity and Add to Cart */}
           <div className="space-y-3 mt-8">
             <h3
@@ -451,7 +449,6 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               </Button>
             </div>
           </div>
-
           {/* Social Sharing Section - Moved outside of button container */}
           <div className="pt-6 mt-6 border-t border-sweet-brown/10">
             <h3 className="font-logo text-lg text-sweet-brown mb-3">
@@ -462,28 +459,28 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                 platform="facebook"
                 url={`${
                   process.env.NEXT_PUBLIC_SITE_URL || "https://rajawadu.com"
-                }/products/${product.slug}?size=${selectedSize}`}
+                }/products/${product.slug}`}
                 title={`Check out ${product.name} from Rajawadu`}
               />
               <SocialShareButton
                 platform="twitter"
                 url={`${
                   process.env.NEXT_PUBLIC_SITE_URL || "https://rajawadu.com"
-                }/products/${product.slug}?size=${selectedSize}`}
+                }/products/${product.slug}`}
                 title={`I just discovered ${product.name} from Rajawadu's Royal Collection!`}
               />
               <SocialShareButton
                 platform="whatsapp"
                 url={`${
                   process.env.NEXT_PUBLIC_SITE_URL || "https://rajawadu.com"
-                }/products/${product.slug}?size=${selectedSize}`}
+                }/products/${product.slug}`}
                 title={`Check out ${product.name} from Rajawadu`}
               />
               <SocialShareButton
                 platform="email"
                 url={`${
                   process.env.NEXT_PUBLIC_SITE_URL || "https://rajawadu.com"
-                }/products/${product.slug}?size=${selectedSize}`}
+                }/products/${product.slug}`}
                 title={`Check out ${product.name} from Rajawadu`}
                 body={`I thought you might be interested in ${product.name} from Rajawadu's Royal Collection!`}
               />
@@ -493,7 +490,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                   navigator.clipboard.writeText(
                     `${
                       process.env.NEXT_PUBLIC_SITE_URL || "https://rajawadu.com"
-                    }/products/${product.slug}?size=${selectedSize}`
+                    }/products/${product.slug}`
                   );
                   addToast({
                     title: "Link copied",
@@ -520,14 +517,12 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               </button>
             </div>
           </div>
-
           {/* Description */}
           <div className="space-y-6 pt-6 border-t border-sweet-brown/10">
             <p className="font-serif text-sweet-brown/80 leading-relaxed">
               {product.description}
             </p>
           </div>
-
           {/* Benefits Section */}
           <div className="space-y-4">
             <h3 className="font-logo text-lg text-sweet-brown">
@@ -551,7 +546,6 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               ))}
             </ul>
           </div>
-
           {/* Expandable Sections */}
           <div className="space-y-4 pt-6 border-t border-sweet-brown/10">
             {/* Ingredients Section */}
@@ -569,13 +563,18 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               </button>
               {expandedSection === "ingredients" && (
                 <div className="pb-4 font-serif text-sweet-brown/80 space-y-2">
-                  <p>
-                    Premium quality fennel seeds, coriander seeds, sesame seeds,
-                    dill seeds, and natural sweeteners.
-                  </p>
-                  <p className="text-sm">
-                    * Ingredients may vary based on the variant selected
-                  </p>
+                  {product.ingredients ? (
+                    <>
+                      <p>{product.ingredients}</p>
+                      <p className="text-sm">
+                        * Ingredients may vary based on the variant selected
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <p></p>
+                    </>
+                  )}
                 </div>
               )}
             </div>
@@ -616,7 +615,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               </button>
               {expandedSection === "shipping" && (
                 <div className="pb-4 font-serif text-sweet-brown/80">
-                  Free shipping on orders above ₹499. Standard delivery within
+                  Free shipping on orders above ₹999. Standard delivery within
                   5-7 business days.
                 </div>
               )}

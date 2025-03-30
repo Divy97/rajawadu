@@ -29,6 +29,7 @@ export interface Database {
           inventory: number;
           images: string[];
           featured: boolean;
+          ingredients: string | null;
           created_at: string;
         };
         Insert: {
@@ -41,6 +42,7 @@ export interface Database {
           inventory?: number;
           images?: string[];
           featured?: boolean;
+          ingredients?: string | null;
           created_at?: string;
         };
         Update: {
@@ -53,6 +55,7 @@ export interface Database {
           inventory?: number;
           images?: string[];
           featured?: boolean;
+          ingredients?: string | null;
           created_at?: string;
         };
       };

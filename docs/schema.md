@@ -15,6 +15,7 @@ create table products (
   inventory int4,
   images text[],
   featured bool,
+  ingredients text,
   created_at timestamptz default now()
 );
 ```

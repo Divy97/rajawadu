@@ -49,12 +49,7 @@ export function Nav() {
           >
             Mukhwas
           </Link>
-          <a
-            href="#about"
-            className="text-sweet-brown hover:text-sweet-orange transition-colors font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-sweet-orange after:transition-all"
-          >
-            About
-          </a>
+
           <a
             href="/contact"
             className="text-sweet-brown hover:text-sweet-orange transition-colors font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-sweet-orange after:transition-all"
@@ -76,13 +71,7 @@ export function Nav() {
             >
               Mukhwas
             </Link>
-            <a
-              href="#about"
-              className="text-sweet-brown hover:text-sweet-orange transition-colors font-medium py-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About
-            </a>
+
             <a
               href="/contact"
               className="text-sweet-brown hover:text-sweet-orange transition-colors font-medium py-2"
