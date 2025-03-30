@@ -108,7 +108,7 @@ export default function CartPage() {
                       onClick={clearCart}
                       className="text-sweet-brown/60 hover:text-sweet-orange transition-colors inline-flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium"
                     >
-                      <Trash2 size={14} className="sm:size-16" />
+                      <Trash2 size={14} className="sm:size-[16px]" />
                       <span>Clear Cart</span>
                     </button>
                   </div>
@@ -133,7 +133,7 @@ export default function CartPage() {
                 href="/products"
                 className="inline-flex items-center gap-1 sm:gap-2 text-sweet-brown hover:text-sweet-orange transition-colors font-medium text-sm sm:text-base"
               >
-                <ArrowLeft size={14} className="sm:size-16" />
+                <ArrowLeft size={14} className="sm:size-[16px]" />
                 <span>Continue Shopping</span>
               </Link>
             </div>
@@ -242,7 +242,7 @@ function CartItemRow({
             onClick={() => onUpdateQuantity(Math.max(1, item.quantity - 1))}
             disabled={isUpdating}
           >
-            <Minus size={14} className="sm:size-16" />
+            <Minus size={14} className="sm:size-[16px]" />
           </button>
           <span className="px-2 sm:px-4 py-1 sm:py-2 text-sweet-brown min-w-[32px] sm:min-w-[40px] text-center font-serif text-sm sm:text-base">
             {item.quantity}
@@ -252,7 +252,7 @@ function CartItemRow({
             onClick={() => onUpdateQuantity(item.quantity + 1)}
             disabled={isUpdating}
           >
-            <Plus size={14} className="sm:size-16" />
+            <Plus size={14} className="sm:size-[16px]" />
           </button>
         </div>
 
