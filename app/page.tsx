@@ -15,7 +15,7 @@ export default async function Home() {
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Raja Wadu",
+    name: "Rajawadu",
     url: "https://rajawadu.com",
     logo: "https://rajawadu.com/images/logo.png",
     sameAs: [
@@ -40,7 +40,7 @@ export default async function Home() {
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
-      email: "info@rajawadu.com",
+      email: "sales@rajawadu.com",
     },
   };
 
@@ -309,11 +309,10 @@ export default async function Home() {
         {/* Stats Section */}
         <section className="py-24 bg-sweet-orange/5">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+            <div className="flex justify-evenly items-center gap-12 flex-wrap">
               {[
-                { number: "1920", label: "Est. Year", emoji: "✤" },
                 { number: "100+", label: "Family Recipes", emoji: "✦" },
-                { number: "4.9", label: "Customer Rating", emoji: "❖" },
+                { number: "4.5", label: "Customer Rating", emoji: "❖" },
                 { number: "3", label: "Generations", emoji: "✦" },
               ].map((stat, index) => (
                 <div key={index} className="text-center">
@@ -396,11 +395,6 @@ export default async function Home() {
                     homes around the world.
                   </p>
                 </div>
-                <Button className="mt-12 bg-sweet-brown hover:bg-sweet-orange text-white px-8 py-6 rounded-full transition-colors">
-                  <Link href="/about" className="font-logo tracking-wide">
-                    Learn More About Us
-                  </Link>
-                </Button>
               </div>
               <div className="relative">
                 <div className="aspect-[4/5] rounded-lg overflow-hidden bg-sweet-cream border border-sweet-brown/10 relative">

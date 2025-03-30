@@ -80,6 +80,11 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+  },
 };
 
 export default function RootLayout({
@@ -95,6 +100,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=5"
+        />
       </head>
       <body
         className={`${inter.className} ${playfair.variable} ${comicNeue.variable} ${bodoni.variable}`}
@@ -102,7 +111,7 @@ export default function RootLayout({
         <AccessibilityProvider>
           <ToastProviderComponent>
             <Nav />
-            <div className="pt-20">
+            <div className="pt-16 sm:pt-20">
               {/* <AccessibilityToolbar /> */}
               {children}
               <Analytics />

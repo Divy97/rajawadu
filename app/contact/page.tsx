@@ -27,10 +27,10 @@ export default function ContactPage() {
                 Email:
               </span>
               <a
-                href="mailto:cc@rajawadu.in"
+                href="mailto:sales@rajawadu.com"
                 className="text-sweet-brown hover:underline"
               >
-                cc@rajawadu.in
+                sales@rajawadu.com
               </a>
             </li>
             <li className="flex items-start">
@@ -38,32 +38,11 @@ export default function ContactPage() {
                 Phone:
               </span>
               <a
-                href="tel:+919772272659"
+                href="tel:+917600130164"
                 className="text-sweet-brown hover:underline"
               >
-                +91 9772272659
+                +91 7600130164 <br /> +91 7069296036
               </a>
-            </li>
-            <li className="flex items-start">
-              <span className="font-medium min-w-[80px] inline-block">
-                WhatsApp:
-              </span>
-              <a
-                href="https://wa.me/919420244111"
-                className="text-sweet-brown hover:underline"
-              >
-                +91 9420244111
-              </a>
-            </li>
-            <li className="flex items-start">
-              <span className="font-medium min-w-[80px] inline-block">
-                Hours:
-              </span>
-              <span>
-                Monday to Saturday: 10:00 AM - 7:00 PM IST
-                <br />
-                Sunday: Closed
-              </span>
             </li>
           </ul>
         </div>
@@ -74,27 +53,20 @@ export default function ContactPage() {
           </h2>
           <address className="not-italic">
             <p className="mb-2">
-              <strong>Rajawadu (ALTERKITCH INDIA PRIVATE LIMITED)</strong>
+              <strong>Rajawadu</strong>
             </p>
             <p className="mb-6">
-              Ground floor, 001, Rajawadu, Sears Towers,
+              11, Vimalnath flat,
               <br />
-              Near Panchvati Circle, opp. Justdial office,
+              Opp Rajkot Nagarik Bank, Navrangpura,
               <br />
-              near central bank, Panchavati Society,
-              <br />
-              Gulbai Tekra, Ahmedabad,
-              <br />
-              Gujarat 380006, India
-            </p>
-            <p>
-              <strong>GST:</strong> [Your GST Number]
+              Ahmedabad, Gujarat, India - 380009
             </p>
           </address>
         </div>
       </div>
 
-      <h2 className="text-2xl font-semibold text-[#6b5130] mb-4">
+      {/* <h2 className="text-2xl font-semibold text-[#6b5130] mb-4">
         Connect With Us
       </h2>
       <div className="mb-12">
@@ -168,7 +140,7 @@ export default function ContactPage() {
             </svg>
           </a>
         </div>
-      </div>
+      </div> */}
 
       <h2 className="text-2xl font-semibold text-[#6b5130] mb-4">Feedback</h2>
       <p className="mb-4">
@@ -176,10 +148,10 @@ export default function ContactPage() {
         Please share your thoughts, suggestions, or concerns with us via email
         at{" "}
         <a
-          href="mailto:feedback@rajawadu.in"
+          href="mailto:sales@rajawadu.com"
           className="text-sweet-brown hover:underline"
         >
-          feedback@rajawadu.in
+          sales@rajawadu.com
         </a>
         .
       </p>
@@ -191,10 +163,10 @@ export default function ContactPage() {
         For wholesale orders, partnerships, or other business-related inquiries,
         please contact us at{" "}
         <a
-          href="mailto:business@rajawadu.in"
+          href="mailto:sales@rajawadu.com"
           className="text-sweet-brown hover:underline"
         >
-          business@rajawadu.in
+          sales@rajawadu.com
         </a>
         .
       </p>
