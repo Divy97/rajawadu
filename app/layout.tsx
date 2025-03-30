@@ -10,7 +10,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ToastProviderComponent } from "@/components/ui/toast";
 import { AccessibilityProvider } from "@/components/AccessibilityProvider";
 import { Analytics } from "@vercel/analytics/next";
-
+import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -115,6 +115,7 @@ export default function RootLayout({
               {/* <AccessibilityToolbar /> */}
               {children}
               <Analytics />
+              <SpeedInsights />
             </div>
             <Footer />
           </ToastProviderComponent>
