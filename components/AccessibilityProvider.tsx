@@ -27,7 +27,7 @@ export function AccessibilityProvider({
   children,
 }: AccessibilityProviderProps) {
   const [highContrastMode, setHighContrastMode] =
-    useState<HighContrastMode>("default");
+    useState<HighContrastMode>("high-contrast");
 
   const toggleHighContrastMode = () => {
     const newMode =

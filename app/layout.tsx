@@ -9,7 +9,6 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { ToastProviderComponent } from "@/components/ui/toast";
 import { AccessibilityProvider } from "@/components/AccessibilityProvider";
-import { AccessibilityToolbar } from "@/components/AccessibilityToolbar";
 
 const inter = Inter({ subsets: ["latin"] });
 const playfair = Playfair_Display({
@@ -103,7 +102,7 @@ export default function RootLayout({
           <ToastProviderComponent>
             <Nav />
             <div className="pt-20">
-              <AccessibilityToolbar />
+              {/* <AccessibilityToolbar /> */}
               {children}
             </div>
             <Footer />

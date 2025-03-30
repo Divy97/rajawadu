@@ -117,9 +117,12 @@ export default async function Home() {
                     after-meal experience.
                   </p>
 
-                  <button className="font-serif bg-sweet-brown text-white px-8 py-4 rounded-full text-lg tracking-wide hover:bg-sweet-orange transition-all hover:shadow-lg">
+                  <Link
+                    href="/products"
+                    className="font-serif bg-sweet-brown hover:bg-sweet-orange text-white px-8 py-4 rounded-full text-lg tracking-wide"
+                  >
                     Explore Collection
-                  </button>
+                  </Link>
                 </div>
 
                 {/* Right Column - Royal Mukhwas Showcase */}
