@@ -9,6 +9,7 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { ToastProviderComponent } from "@/components/ui/toast";
 import { AccessibilityProvider } from "@/components/AccessibilityProvider";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"] });
 const playfair = Playfair_Display({
@@ -104,6 +105,7 @@ export default function RootLayout({
             <div className="pt-20">
               {/* <AccessibilityToolbar /> */}
               {children}
+              <Analytics />
             </div>
             <Footer />
           </ToastProviderComponent>
