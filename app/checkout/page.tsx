@@ -40,7 +40,10 @@ export default function CheckoutPage() {
     e.preventDefault();
     if (currentStep === "shipping") {
       setCurrentStep("payment");
-      window.scrollTo(0, 0);
+      // Safely use window.scrollTo by checking if running in browser
+      if (typeof window !== "undefined") {
+        window.scrollTo(0, 0);
+      }
     } else {
       setIsProcessing(true);
       // TODO: Implement payment processing

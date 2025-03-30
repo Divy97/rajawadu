@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
 import { ChevronDown, ChevronUp, Minus, Plus } from "lucide-react";
@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { useToast } from "@/components/ui/use-toast";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { SocialShareButton } from "@/components/SocialShareButton";
+import React from "react";
 
 type ProductDetailsProps = {
   product: Product;
@@ -43,50 +44,61 @@ export function ProductDetails({ product }: ProductDetailsProps) {
   const { addToast } = useToast();
 
   // Function to update URL with current selections
-  const updateURLWithOptions = (
-    size: string,
-    qty: number,
-    imgIndex: number = activeImage,
-    section: string | null = expandedSection
-  ) => {
-    // Create new URLSearchParams instance from current params
-    const params = new URLSearchParams(searchParams.toString());
+  const updateURLWithOptions = useCallback(
+    (
+      size: string,
+      qty: number,
+      imgIndex: number = activeImage,
+      section: string | null = expandedSection
+    ) => {
+      // Create new URLSearchParams instance from current params
+      const params = new URLSearchParams(searchParams.toString());
 
-    // Update or add size parameter
-    params.set("size", size);
+      // Update or add size parameter
+      params.set("size", size);
 
-    // Only add quantity if it's different from default (1)
-    if (qty > 1) {
-      params.set("qty", qty.toString());
-    } else {
-      params.delete("qty");
-    }
+      // Only add quantity if it's different from default (1)
+      if (qty > 1) {
+        params.set("qty", qty.toString());
+      } else {
+        params.delete("qty");
+      }
 
-    // Add image index if not 0 (default)
-    if (imgIndex > 0) {
-      params.set("img", imgIndex.toString());
-    } else {
-      params.delete("img");
-    }
+      // Add image index if not 0 (default)
+      if (imgIndex > 0) {
+        params.set("img", imgIndex.toString());
+      } else {
+        params.delete("img");
+      }
 
-    // Add expanded section if any
-    if (section) {
-      params.set("section", section);
-    } else {
-      params.delete("section");
-    }
+      // Add expanded section if any
+      if (section) {
+        params.set("section", section);
+      } else {
+        params.delete("section");
+      }
 
-    // Generate new URL with updated search params
-    const newURL = `${pathname}?${params.toString()}`;
+      // Generate new URL with updated search params
+      const newURL = `${pathname}?${params.toString()}`;
 
-    // Update the URL without a page reload
-    router.replace(newURL, { scroll: false });
-  };
+      // Update the URL without a page reload
+      router.replace(newURL, { scroll: false });
+    },
+    [searchParams, pathname, router, activeImage, expandedSection]
+  );
 
   // Effect to update URL when options change
   useEffect(() => {
     updateURLWithOptions(selectedSize, quantity, activeImage, expandedSection);
-  }, [selectedSize, quantity, activeImage, expandedSection]);
+  }, [
+    selectedSize,
+    quantity,
+    activeImage,
+    expandedSection,
+    updateURLWithOptions,
+    pathname,
+    router,
+  ]);
 
   // Ensure product has images array to prevent errors
   const productImages =
@@ -182,7 +194,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           type: "success",
           action: {
             label: "View Cart",
-            onClick: () => (window.location.href = "/cart"),
+            onClick: () => router.push("/cart"),
           },
         });
 

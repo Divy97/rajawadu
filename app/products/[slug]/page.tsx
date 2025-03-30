@@ -4,11 +4,13 @@ import { getProductBySlug, getProducts } from "@/lib/api/products";
 import Script from "next/script";
 import { Metadata } from "next";
 import { ProductDetailsWithErrorBoundary } from "./ProductDetailsWithErrorBoundary";
+import { Suspense } from "react";
 
 type ProductPageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export const revalidate = 3600; // Revalidate this page every hour
@@ -17,7 +19,7 @@ export async function generateMetadata({
   params,
 }: ProductPageProps): Promise<Metadata> {
   // Destructure slug from params to avoid the warning
-  const { slug } = params;
+  const { slug } = await params;
   const product = await getProductBySlug(slug);
 
   if (!product) {
@@ -70,7 +72,7 @@ export async function generateMetadata({
 
 export default async function ProductPage({ params }: ProductPageProps) {
   // Destructure slug from params to avoid the warning
-  const { slug } = params;
+  const { slug } = await params;
   const product = await getProductBySlug(slug);
 
   if (!product) {
@@ -162,7 +164,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
           / <span className="text-sweet-brown">{product.name}</span>
         </div>
 
-        <ProductDetailsWithErrorBoundary product={product} />
+        <Suspense
+          fallback={
+            <div className="p-12 text-center">Loading product details...</div>
+          }
+        >
+          <ProductDetailsWithErrorBoundary product={product} />
+        </Suspense>
       </div>
     </div>
   );

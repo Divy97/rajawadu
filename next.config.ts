@@ -3,7 +3,10 @@ const nextConfig = {
   /* config options here */
 
   // Optional: Improve error messages during development
-  webpack: (config) => {
+  webpack: (
+    // @ts-expect-error - webpack config type is complex
+    config
+  ) => {
     config.infrastructureLogging = {
       level: "error",
     };

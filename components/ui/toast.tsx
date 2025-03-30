@@ -48,25 +48,28 @@ export function ToastProviderComponent({
 }) {
   const [toasts, setToasts] = React.useState<Toast[]>([]);
 
-  const addToast = React.useCallback((toast: Omit<Toast, "id">) => {
-    const id = Math.random().toString(36).substring(2, 9);
-    const newToast = { ...toast, id };
-    setToasts((prevToasts) => [...prevToasts, newToast]);
-
-    // Auto-dismiss toast after duration
-    if (toast.duration !== 0) {
-      const duration = toast.duration || getDurationByType(toast.type);
-      setTimeout(() => {
-        removeToast(id);
-      }, duration);
-    }
-
-    return id;
-  }, []);
-
   const removeToast = React.useCallback((id: string) => {
     setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
   }, []);
+
+  const addToast = React.useCallback(
+    (toast: Omit<Toast, "id">) => {
+      const id = Math.random().toString(36).substring(2, 9);
+      const newToast = { ...toast, id };
+      setToasts((prevToasts) => [...prevToasts, newToast]);
+
+      // Auto-dismiss toast after duration
+      if (toast.duration !== 0) {
+        const duration = toast.duration || getDurationByType(toast.type);
+        setTimeout(() => {
+          removeToast(id);
+        }, duration);
+      }
+
+      return id;
+    },
+    [removeToast]
+  );
 
   const clearAllToasts = React.useCallback(() => {
     setToasts([]);
