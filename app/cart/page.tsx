@@ -174,16 +174,16 @@ export default function CartPage() {
                     )}
                   </div>
 
-                  {/* <Link href="/checkout" className="block mt-8"> */}
+                  <Link href="/checkout" className="block mt-8">
                   <Button
                     className="w-full bg-sweet-brown hover:bg-sweet-orange text-white py-2 sm:py-7 rounded-full transition-all mt-4 sm:mt-6 text-sm sm:text-base"
-                    disabled
+                    
                   >
                     <span className="font-logo tracking-wide">
                       Proceed to Checkout
                     </span>
                   </Button>
-                  {/* </Link> */}
+                  </Link>
 
                   <div className="text-sweet-brown/60 text-xs sm:text-sm text-center mt-2 sm:mt-4 font-serif">
                     Secure checkout powered by Stripe
